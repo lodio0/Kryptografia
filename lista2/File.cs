@@ -17,7 +17,7 @@ namespace Kryptografia_lista_1
             {
                 using (StreamReader sr = new StreamReader(fn))
                 {
-                    // Read the stream to a string, and write the string to the console.
+                    
                     line = sr.ReadToEnd();
                 }
             }
@@ -35,7 +35,6 @@ namespace Kryptografia_lista_1
             {
                 using (StreamReader sr = new StreamReader(fn))
                 {
-                    // Read the stream to a string, and write the string to the console.
                     line = sr.ReadToEnd();
                 }
             }
@@ -53,7 +52,6 @@ namespace Kryptografia_lista_1
             {
                 using (StreamReader sr = new StreamReader(fn))
                 {
-                    // Read the stream to a string, and write the string to the console.
                     line = sr.ReadToEnd();
                 }
             }

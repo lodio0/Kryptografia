@@ -23,7 +23,6 @@ namespace Kryptografia_lista_1
             this.szukaj = szukaj;
             alfabet = new Alfabet();
             byte[] ff = System.Text.Encoding.ASCII.GetBytes(czescKlucza2);
-            //Console.WriteLine("{0}", ff[0]);
 
         }
         public void ThreadRun()
@@ -33,10 +32,8 @@ namespace Kryptografia_lista_1
             string czescKlucza1 = "";
             while (i <= szukaj.max)
             {
-                //Console.WriteLine("Test klucza nr :{0}",i);
                 i = szukaj.wykonane();
 
-                //if (i % 100000000 == 0) Console.WriteLine(i);
                 if (i <= szukaj.max)
                 {
                     czescKlucza1 = i.ToString("X");
@@ -51,7 +48,6 @@ namespace Kryptografia_lista_1
                         RC4Engine rc4 = new RC4Engine();
                         KeyParameter keyParam = new KeyParameter(System.Text.Encoding.ASCII.GetBytes(klucz));
                         rc4.Init(false, keyParam);
-                        //  clearText = new byte[kryptogram.Length];
                         rc4.ProcessBytes(kryptogram, 0, kryptogram.Length, clearText, 0);
 
                     }
@@ -59,7 +55,6 @@ namespace Kryptografia_lista_1
                     {
 
                     }
-                    // String wynik = RC4.Decrypt(klucz, kryptogram, true);
                     bool zgodne = true;
                     for (int j = 0; j < clearText.Length; j++)
                     {
@@ -68,7 +63,6 @@ namespace Kryptografia_lista_1
                             zgodne = false;
                         }
                     }
-                    //Console.WriteLine("Wiadomosc : {0} , klucz {1}", wynik, klucz);
                     if (zgodne)
                     {
                         Console.Write("Wiadomosc : ");
