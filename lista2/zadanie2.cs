@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Kryptografia_lista_1
 {
     //wiadomosc : Apple Took Down An Ad Blocker For Apps Over Privacy Concerns
-    //klucz: 
+    //klucz: 1331108ed3fb313a
     class Zadanie2
     {
         public void wykonaj()
