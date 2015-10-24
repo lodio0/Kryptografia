@@ -63,6 +63,7 @@ namespace Kryptografia_lista_1
                             zgodne = false;
                         }
                     }
+                    //jeśli znalazl dobry klucz
                     if (zgodne)
                     {
                         Console.Write("Wiadomosc : ");
@@ -72,6 +73,7 @@ namespace Kryptografia_lista_1
                         }
                         Console.WriteLine("");
                         Console.WriteLine(" klucz: {0}",klucz);
+                        szukaj.ileZrobiono = szukaj.max;
                     }
 
                 }

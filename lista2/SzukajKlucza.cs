@@ -11,7 +11,7 @@ namespace Kryptografia_lista_1
     {
 
         public Int64 max ;
-        int ileZrobiono;
+        public Int64 ileZrobiono;
         bool readerFlag = true;
         public SzukajKlucza()
         {
