@@ -143,6 +143,7 @@ int main(int argc, char *argv[])
 	else
 	{
 		char inputf[100];
+		std::cout << "Towrze konfig :" << std::endl;
 		std::cout << "Podaj pin :" << std::endl;
 		std::cin.getline(inputf, sizeof(inputf));
 		std::string zawartosc(inputf);
