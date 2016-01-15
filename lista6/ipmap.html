@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Wireshark: IP Location Map</title>
+    <style type="text/css">
+    body {
+      font-family: Arial, Helvetica, sans-serif; font-size: 13px;
+      line-height: 17px;
+    }
+    </style>
+    <script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
+    <script type="text/javascript" src="http://openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+
+    <script type="text/javascript">
+        <!--
+        var map, layer;
+        var selectControl, selectedFeature;
+
+        function onPopupClose(event) {
+            selectControl.unselect(this.feature);
+        }
+
+        function EndpointSelected(event) {
+            var feature = event.feature;
+            popup = new OpenLayers.Popup.FramedCloud("endpoint",
+                feature.geometry.getBounds().getCenterLonLat(),
+                new OpenLayers.Size(25,25),
+                "<h3>"+ feature.attributes.title + "</h3>" +
+                feature.attributes.description,
+                null, true, onPopupClose);
+            feature.popup = popup;
+            popup.feature = feature;
+            map.addPopup(popup);
+        }
+
+        function EndpointUnselected(event) {
+            var feature = event.feature;
+            if (feature.popup) {
+                popup.feature = null;
+                map.removePopup(feature.popup);
+                feature.popup.destroy();
+                feature.popup = null;
+            }
+        }
+
+        function init() {
+            var endpoints = {
+                "type": "FeatureCollection",
+                "features": [ // Start endpoint list - MUST match hostlist_table.c
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-6.259700, 53.347801] },
+  'properties': { 'title': 'star.c10r.facebook.com', 'description': 'Packets: 681<br/>Bytes: 234985' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.334099, 47.610298] },
+  'properties': { 'title': 'server-54-192-228-61.waw50.r.cloudfront.net', 'description': 'Packets: 1<br/>Bytes: 140' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'clients.l.google.com', 'description': 'Packets: 6<br/>Bytes: 976' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [19.916700, 50.083302] },
+  'properties': { 'title': 'ntp.ifj.edu.pl', 'description': 'Packets: 7<br/>Bytes: 1058' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-6.259700, 53.347801] },
+  'properties': { 'title': 'mqtt.c10r.facebook.com', 'description': 'Packets: 204<br/>Bytes: 62356' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-119.528999, 45.778801] },
+  'properties': { 'title': 'ec2-52-26-103-197.us-west-2.compute.amazonaws.com', 'description': 'Packets: 9<br/>Bytes: 2245' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'wn-in-f128.1e100.net', 'description': 'Packets: 404<br/>Bytes: 175399' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'clients.l.google.com', 'description': 'Packets: 73<br/>Bytes: 19430' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [113.250000, 23.116699] },
+  'properties': { 'title': 'goupdate.3g.cn', 'description': 'Packets: 33<br/>Bytes: 8348' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'www.google.com', 'description': 'Packets: 27<br/>Bytes: 11196' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.483803, 39.033501] },
+  'properties': { 'title': 's3-1-w.amazonaws.com', 'description': 'Packets: 7<br/>Bytes: 1114' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-6.259700, 53.347801] },
+  'properties': { 'title': 'z-m.c10r.facebook.com', 'description': 'Packets: 90<br/>Bytes: 39347' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-6.259700, 53.347801] },
+  'properties': { 'title': 'mqtt.c10r.facebook.com', 'description': 'Packets: 105<br/>Bytes: 17093' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.431099, 38.894299] },
+  'properties': { 'title': 'e9.whatsapp.net', 'description': 'Packets: 21<br/>Bytes: 3248' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.299500, 47.583900] },
+  'properties': { 'title': 'dh7t3kh998lbp.cloudfront.net', 'description': 'Packets: 6<br/>Bytes: 787' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'googleapis.l.google.com', 'description': 'Packets: 261<br/>Bytes: 136166' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.178101, 37.459000] },
+  'properties': { 'title': 'mqtt-z-shv-08-prn2.facebook.com', 'description': 'Packets: 14<br/>Bytes: 3166' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.483803, 39.033501] },
+  'properties': { 'title': 'ec2-23-23-246-77.compute-1.amazonaws.com', 'description': 'Packets: 3<br/>Bytes: 404' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.178101, 37.459000] },
+  'properties': { 'title': 'xx-fbcdn-shv-01-bru2.fbcdn.net', 'description': 'Packets: 103<br/>Bytes: 49675' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-6.259700, 53.347801] },
+  'properties': { 'title': 'edge-star-shv-01-fra3.facebook.com', 'description': 'Packets: 2<br/>Bytes: 268' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'android.l.google.com', 'description': 'Packets: 1000<br/>Bytes: 404345' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'fra07s29-in-f30.1e100.net', 'description': 'Packets: 9<br/>Bytes: 1146' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.393303, 37.769699] },
+  'properties': { 'title': 'api.qpony.pl', 'description': 'Packets: 594<br/>Bytes: 537601' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'ea-in-f188.1e100.net', 'description': 'Packets: 59<br/>Bytes: 25621' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-6.259700, 53.347801] },
+  'properties': { 'title': 'scontent.xx.fbcdn.net', 'description': 'Packets: 84<br/>Bytes: 50046' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.342201, 47.634399] },
+  'properties': { 'title': '52.84.195.217', 'description': 'Packets: 40<br/>Bytes: 5874' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [21.016701, 52.233299] },
+  'properties': { 'title': 'interia.hit.gemius.pl', 'description': 'Packets: 4<br/>Bytes: 492' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'android.l.google.com', 'description': 'Packets: 152<br/>Bytes: 60092' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'www.google.com', 'description': 'Packets: 11<br/>Bytes: 4543' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-6.259700, 53.347801] },
+  'properties': { 'title': 'star.c10r.facebook.com', 'description': 'Packets: 27<br/>Bytes: 4059' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.178101, 37.459000] },
+  'properties': { 'title': 'mqtt-z-shv-09-prn2.facebook.com', 'description': 'Packets: 16<br/>Bytes: 5677' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [21.016701, 52.233299] },
+  'properties': { 'title': 'tol.interia.pl', 'description': 'Packets: 9<br/>Bytes: 2217' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.483803, 39.033501] },
+  'properties': { 'title': 'ec2-54-88-39-121.compute-1.amazonaws.com', 'description': 'Packets: 7<br/>Bytes: 938' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-6.259700, 53.347801] },
+  'properties': { 'title': 'edge-mqtt-shv-01-fra3.facebook.com', 'description': 'Packets: 42<br/>Bytes: 6517' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'clients.l.google.com', 'description': 'Packets: 30<br/>Bytes: 11085' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-6.259700, 53.347801] },
+  'properties': { 'title': 'instagram-p3-shv-01-waw1.fbcdn.net', 'description': 'Packets: 60<br/>Bytes: 25407' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'argo.svcmot.com', 'description': 'Packets: 43<br/>Bytes: 17130' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-119.528999, 45.778801] },
+  'properties': { 'title': 'ec2-52-24-62-212.us-west-2.compute.amazonaws.com', 'description': 'Packets: 4<br/>Bytes: 536' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'android.l.google.com', 'description': 'Packets: 2<br/>Bytes: 268' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.483803, 39.033501] },
+  'properties': { 'title': 'events-endpoint-b-1623273513.us-east-1.elb.amazonaws.com', 'description': 'Packets: 1<br/>Bytes: 138' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.483803, 39.033501] },
+  'properties': { 'title': 'events-endpoint-b-1623273513.us-east-1.elb.amazonaws.com', 'description': 'Packets: 9<br/>Bytes: 8118' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'ee-in-f188.1e100.net', 'description': 'Packets: 15<br/>Bytes: 2827' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [2.350000, 48.860001] },
+  'properties': { 'title': 'stats.qpony.pl', 'description': 'Packets: 12<br/>Bytes: 2665' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'ssl-google-analytics.l.google.com', 'description': 'Packets: 22<br/>Bytes: 12036' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'accounts.google.com', 'description': 'Packets: 5<br/>Bytes: 671' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.431099, 38.894299] },
+  'properties': { 'title': 'e14.whatsapp.net', 'description': 'Packets: 10<br/>Bytes: 1621' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'googleapis.l.google.com', 'description': 'Packets: 172<br/>Bytes: 135897' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'clients.l.google.com', 'description': 'Packets: 1<br/>Bytes: 129' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'android.l.google.com', 'description': 'Packets: 6<br/>Bytes: 971' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.094597, 37.304199] },
+  'properties': { 'title': '17.110.225.15', 'description': 'Packets: 1<br/>Bytes: 126' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.393303, 37.769699] },
+  'properties': { 'title': '199.16.156.241', 'description': 'Packets: 2<br/>Bytes: 286' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.094597, 37.304199] },
+  'properties': { 'title': '17.248.146.105', 'description': 'Packets: 2<br/>Bytes: 252' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [21.016701, 52.233299] },
+  'properties': { 'title': '13.244.40.164-rev.hti.pl', 'description': 'Packets: 15142<br/>Bytes: 22057412' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'android.l.google.com', 'description': 'Packets: 9<br/>Bytes: 1890' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'csi.gstatic.com', 'description': 'Packets: 48<br/>Bytes: 14303' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.483803, 39.033501] },
+  'properties': { 'title': 'ec2-23-23-110-16.compute-1.amazonaws.com', 'description': 'Packets: 1<br/>Bytes: 160' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.088097, 37.384499] },
+  'properties': { 'title': 'google-public-dns-a.google.com', 'description': 'Packets: 1<br/>Bytes: 134' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'connectivitycheck.android.com', 'description': 'Packets: 1<br/>Bytes: 126' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'android.l.google.com', 'description': 'Packets: 3<br/>Bytes: 402' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [18.068600, 59.329399] },
+  'properties': { 'title': 'sto3-accesspoint-a37.sto3.spotify.com', 'description': 'Packets: 7<br/>Bytes: 1270' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'android.l.google.com', 'description': 'Packets: 1<br/>Bytes: 134' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'csi.gstatic.com', 'description': 'Packets: 15<br/>Bytes: 2943' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'photos-ugc.l.googleusercontent.com', 'description': 'Packets: 10<br/>Bytes: 7597' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'android.l.google.com', 'description': 'Packets: 3<br/>Bytes: 386' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'android.l.google.com', 'description': 'Packets: 8<br/>Bytes: 1239' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.483803, 39.033501] },
+  'properties': { 'title': 'ec2-107-23-49-230.compute-1.amazonaws.com', 'description': 'Packets: 8<br/>Bytes: 1072' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'android.l.google.com', 'description': 'Packets: 6<br/>Bytes: 963' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-119.528999, 45.778801] },
+  'properties': { 'title': 'ec2-52-26-16-74.us-west-2.compute.amazonaws.com', 'description': 'Packets: 10<br/>Bytes: 1340' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'wb-in-f128.1e100.net', 'description': 'Packets: 11<br/>Bytes: 2948' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.007401, 37.424900] },
+  'properties': { 'title': 'agentportal.flurry.vip.bf2.yahoo.com', 'description': 'Packets: 36<br/>Bytes: 5877' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'appspot.l.google.com', 'description': 'Packets: 55<br/>Bytes: 30628' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'android.l.google.com', 'description': 'Packets: 11<br/>Bytes: 1454' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'mobile-gtalk.l.google.com', 'description': 'Packets: 7<br/>Bytes: 1022' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-88.054001, 42.053398] },
+  'properties': { 'title': 'secure-gl.imrworldwide.com', 'description': 'Packets: 5<br/>Bytes: 670' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [18.068600, 59.329399] },
+  'properties': { 'title': 'farmheroes.king.com', 'description': 'Packets: 7<br/>Bytes: 873' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'android.l.google.com', 'description': 'Packets: 2<br/>Bytes: 268' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-0.093100, 51.514198] },
+  'properties': { 'title': 'lon24.ff.avast.com', 'description': 'Packets: 2<br/>Bytes: 488' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-122.057404, 37.419201] },
+  'properties': { 'title': 'chat-gateway055-prod.chat.snapchat.com', 'description': 'Packets: 11<br/>Bytes: 1642' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.483803, 39.033501] },
+  'properties': { 'title': 'settings-crashlytics-1410998606.us-east-1.elb.amazonaws.com', 'description': 'Packets: 90<br/>Bytes: 14938' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.483803, 39.033501] },
+  'properties': { 'title': 'settings-crashlytics-1410998606.us-east-1.elb.amazonaws.com', 'description': 'Packets: 14<br/>Bytes: 2016' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.483803, 39.033501] },
+  'properties': { 'title': 'settings-crashlytics-1410998606.us-east-1.elb.amazonaws.com', 'description': 'Packets: 61<br/>Bytes: 9861' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.483803, 39.033501] },
+  'properties': { 'title': 'settings-crashlytics-1410998606.us-east-1.elb.amazonaws.com', 'description': 'Packets: 12<br/>Bytes: 2056' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.483803, 39.033501] },
+  'properties': { 'title': 'settings-crashlytics-1410998606.us-east-1.elb.amazonaws.com', 'description': 'Packets: 9<br/>Bytes: 1318' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.483803, 39.033501] },
+  'properties': { 'title': 'settings-crashlytics-1410998606.us-east-1.elb.amazonaws.com', 'description': 'Packets: 5<br/>Bytes: 782' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-6.259700, 53.347801] },
+  'properties': { 'title': 'z-m.c10r.facebook.com', 'description': 'Packets: 298<br/>Bytes: 245567' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.483803, 39.033501] },
+  'properties': { 'title': 'settings-crashlytics-1410998606.us-east-1.elb.amazonaws.com', 'description': 'Packets: 9<br/>Bytes: 1346' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-77.483803, 39.033501] },
+  'properties': { 'title': 'settings-crashlytics-1410998606.us-east-1.elb.amazonaws.com', 'description': 'Packets: 7<br/>Bytes: 1050' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-6.259700, 53.347801] },
+  'properties': { 'title': 'instagram-p3-shv-01-fra3.fbcdn.net', 'description': 'Packets: 1<br/>Bytes: 126' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [-121.894997, 37.339401] },
+  'properties': { 'title': 'ec2-54-215-241-186.us-west-1.compute.amazonaws.com', 'description': 'Packets: 2<br/>Bytes: 274' }
+},
+{
+  'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [21.016701, 52.233299] },
+  'properties': { 'title': 'dns2.tpsa.pl', 'description': 'Packets: 4<br/>Bytes: 564' }
+}                ]
+            };
+            map = new OpenLayers.Map('map', {
+                controls: [
+                    new OpenLayers.Control.PanZoomBar(),
+                    new OpenLayers.Control.ZoomBox(),
+                    new OpenLayers.Control.ScaleLine(),
+                    new OpenLayers.Control.MousePosition(),
+                    new OpenLayers.Control.Navigation(),
+                    new OpenLayers.Control.Attribution()
+                    ]
+                //projection: new OpenLayers.Projection("EPSG:900913"),
+                //displayProjection: new OpenLayers.Projection("EPSG:4326"),
+                //maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34, 20037508.34, 20037508.34),
+                //numZoomLevels: 18,
+                //maxResolution: 156543,
+                //units: "m"
+            });
+            layer = new OpenLayers.Layer.WMS("OpenLayers WMS",
+                    "http://vmap0.tiles.osgeo.org/wms/vmap0",
+                    {layers: 'basic'},
+                    {wrapDateLine: true} );
+            map.addLayer(layer);
+            //map.addLayer(new OpenLayers.Layer.OSM.Mapnik("Mapnik"));
+            //map.addLayer(new OpenLayers.Layer.Text("IP Locations", {
+            //    location: map_file, projection: new OpenLayers.Projection("EPSG:4326")} ) );
+            //
+            //map.setCenter(new OpenLayers.LonLat(lon, lat), zoom);
+
+            var geojson_format = new OpenLayers.Format.GeoJSON();
+            var vector_layer = new OpenLayers.Layer.Vector("IP Endpoints");
+            map.addLayer(vector_layer);
+            vector_layer.addFeatures(geojson_format.read(endpoints));
+
+            if (endpoints.features.length < 1) {
+                document.getElementById("statusmsg").innerHTML = "No endpoints to map";
+            } else {
+                map.zoomToExtent(vector_layer.getDataExtent());
+            }
+
+            selectControl = new OpenLayers.Control.SelectFeature(vector_layer);
+            map.addControl(selectControl);
+            selectControl.activate();
+
+            vector_layer.events.on({
+                'featureselected': EndpointSelected,
+                'featureunselected': EndpointUnselected
+            });
+        }
+        // -->
+    </script>
+  </head>
+  <body onload="init()">
+    <div id="statusmsg" style="float: right; z-index: 9999;"></div>
+    <div id="map" style="z-index: 0;"></div>
+  </body>
+</html>
